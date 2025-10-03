@@ -37,13 +37,13 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-hero text-primary-foreground">
+      <section className="pt-32 pb-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
               Get in Touch
             </h1>
-            <p className="text-xl text-primary-foreground/90">
+            <p className="text-xl text-muted-foreground">
               We're here to help. Reach out to us anytime and we'll get back to you as soon as possible.
             </p>
           </div>

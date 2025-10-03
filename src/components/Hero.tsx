@@ -2,18 +2,41 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Heart, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
+import { useState, useEffect } from "react";
 
 const Hero = () => {
+  const images = [
+    { src: heroBg, alt: "Healthcare professionals with family" },
+    { src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920&h=1080&fit=crop", alt: "Medical care for families" },
+    { src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1920&h=1080&fit=crop", alt: "Healthcare consultation" },
+    { src: "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1920&h=1080&fit=crop", alt: "Medical professionals" },
+  ];
+
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Image Carousel */}
       <div className="absolute inset-0">
-        <img 
-          src={heroBg} 
-          alt="Healthcare professionals with family" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-hero opacity-90"></div>
+        {images.map((image, index) => (
+          <img 
+            key={index}
+            src={image.src} 
+            alt={image.alt} 
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              index === currentImage ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
       {/* Content */}
